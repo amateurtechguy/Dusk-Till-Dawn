@@ -1,18 +1,24 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.InputSystem;
+
 public class Footsteps : MonoBehaviour
 {
     public AudioSource FootstepsSound;
-    void update()
+
+    void Update()
     {
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        Keyboard kb = Keyboard.current;
+        if (kb == null) return;
+
+        bool moving = kb.wKey.isPressed || kb.aKey.isPressed || kb.sKey.isPressed || kb.dKey.isPressed;
+
+        if (moving && !FootstepsSound.isPlaying)
         {
-            FootstepsSound.enabled = true;
+            FootstepsSound.Play();
         }
-        else
+        else if (!moving && FootstepsSound.isPlaying)
         {
-            FootstepsSound.enabled = false;
+            FootstepsSound.Stop();
         }
     }
 }

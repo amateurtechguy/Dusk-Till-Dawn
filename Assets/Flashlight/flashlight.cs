@@ -1,34 +1,49 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Flashlight : MonoBehaviour
 {
     public GameObject ON;
     public GameObject OFF;
+    public AudioSource audioSource;
+    public AudioClip clickSound;
     private bool isON;
+
     void Start()
     {
-        ON.SetActive(false);
-        OFF.SetActive(true);
         isON = false;
+        UpdateState();
     }
-
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Keyboard.current != null && Keyboard.current.fKey.wasPressedThisFrame)
         {
-           
-        if (isON)
-        {
-            ON.SetActive(false);
-            OFF.SetActive(true);
-        } 
-        if (!isON)
-        {
-            ON.SetActive(true);
-            OFF.SetActive(false);
-        } 
-        isON = !isON;
+            isON = !isON;
+            UpdateState();
+            PlayClick();
         }
     }
+
+    void UpdateState()
+    {
+        ON.SetActive(isON);
+        OFF.SetActive(!isON);
+    }
+
+    void PlayClick()
+{
+    if (audioSource == null)
+    {
+        Debug.LogWarning("AudioSource is not assigned");
+        return;
+    }
+    if (clickSound == null)
+    {
+        Debug.LogWarning("ClickSound is not assigned");
+        return;
+    }
+    Debug.Log("Playing click");
+    audioSource.PlayOneShot(clickSound);
+}
 }

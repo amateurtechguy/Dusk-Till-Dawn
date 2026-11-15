@@ -1,19 +1,20 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(AudioSource))]
 public class Flashlight : MonoBehaviour
 {
     public GameObject ON;
     public GameObject OFF;
-    public AudioSource audioSource;
+    public AudioClip clickSound;
+    [Range(0f, 1f)] public float volume = 1f;
+    private AudioSource audioSource;
     private bool isON;
 
     void Awake()
     {
-        if (audioSource == null)
-        {
-            audioSource = GetComponentInChildren<AudioSource>();
-        }
+        audioSource = GetComponent<AudioSource>();
+        audioSource.playOnAwake = false;
     }
 
     void Start()
@@ -40,11 +41,11 @@ public class Flashlight : MonoBehaviour
 
     void PlayClick()
     {
-        if (audioSource == null)
+        if (clickSound == null)
         {
-            Debug.LogWarning("AudioSource not found");
+            Debug.LogWarning("Click sound not assigned");
             return;
         }
-        audioSource.Play();
+        audioSource.PlayOneShot(clickSound, volume);
     }
 }

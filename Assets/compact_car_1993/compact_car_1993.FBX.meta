@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 147d2a3eabc556e4db221502154d0dd3
+AssetOrigin:
+  serializedVersion: 1
+  productId: 22085
+  packageName: Compact Car 1993
+  packageVersion: 1
+  assetPath: Assets/compact_car_1993/compact_car_1993.FBX
+  uploadId: 22726
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable:
@@ -123,7 +130,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    preBakeConvexCollisionMesh: 0
+    preBakeConvexCollisionMesh: 1
     preBakeTriangleCollisionMesh: 0
     importPhysicalCameras: 0
     importVisibility: 0
@@ -198,10 +205,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 22085
-  packageName: Compact Car 1993
-  packageVersion: 1
-  assetPath: Assets/compact_car_1993/compact_car_1993.FBX
-  uploadId: 22726

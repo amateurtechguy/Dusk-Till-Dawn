@@ -6,8 +6,15 @@ public class Flashlight : MonoBehaviour
     public GameObject ON;
     public GameObject OFF;
     public AudioSource audioSource;
-    public AudioClip clickSound;
     private bool isON;
+
+    void Awake()
+    {
+        if (audioSource == null)
+        {
+            audioSource = GetComponentInChildren<AudioSource>();
+        }
+    }
 
     void Start()
     {
@@ -32,18 +39,12 @@ public class Flashlight : MonoBehaviour
     }
 
     void PlayClick()
-{
-    if (audioSource == null)
     {
-        Debug.LogWarning("AudioSource is not assigned");
-        return;
+        if (audioSource == null)
+        {
+            Debug.LogWarning("AudioSource not found");
+            return;
+        }
+        audioSource.Play();
     }
-    if (clickSound == null)
-    {
-        Debug.LogWarning("ClickSound is not assigned");
-        return;
-    }
-    Debug.Log("Playing click");
-    audioSource.PlayOneShot(clickSound);
-}
 }
